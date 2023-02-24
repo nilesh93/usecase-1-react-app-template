@@ -12,7 +12,7 @@ COPY . ./
 RUN yarn build
 
 # Stage 2 - Nginx reverse proxy
-FROM nginx:1.12-alpine
+FROM nginx:1.23.3-alpine
 
 LABEL app @project-x/admin-panel
 
