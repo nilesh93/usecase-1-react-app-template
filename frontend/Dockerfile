@@ -30,7 +30,7 @@ RUN addgroup -g 10014 newgroup && \
     adduser -D -u 10014 -G newgroup newuser
 
 RUN chown -R nginx:nginx /app && \
-    chmod -R 755 /app && \
+    chmod -R 755 /usr/share/nginx/html && \
     chown -R nginx:nginx /var/cache/nginx && \
     chown -R nginx:nginx /var/log/nginx && \
     chown -R nginx:nginx /etc/nginx/conf.d && \
