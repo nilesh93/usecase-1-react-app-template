@@ -26,6 +26,14 @@ COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html
 
 EXPOSE 80
 
+RUN su -c 'chown -R nginx:nginx /app' 10014 && \
+    su -c 'chmod -R 755 /app' 10014 && \
+    su -c 'chown -R nginx:nginx /var/cache/nginx' 10014 && \
+    su -c 'chown -R nginx:nginx /var/log/nginx' 10014 && \
+    su -c 'chown -R nginx:nginx /etc/nginx/conf.d' 10014 && \
+    su -c 'touch /var/run/nginx.pid' 10014 && \
+    su -c 'chown -R nginx:nginx /var/run/nginx.pid' 10014
+
 USER 10014
 
 CMD ["nginx", "-g", "daemon off;"]
