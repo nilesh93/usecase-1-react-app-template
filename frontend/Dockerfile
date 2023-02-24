@@ -26,15 +26,16 @@ COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html
 
 EXPOSE 80
 
-RUN  useradd -u 10014 -m newuser
+RUN addgroup -g 10014 newgroup && \
+    adduser -D -u 10014 -G newgroup newuser
 
-RUN su -c 'chown -R nginx:nginx /app' 10014 && \
-    su -c 'chmod -R 755 /app' 10014 && \
-    su -c 'chown -R nginx:nginx /var/cache/nginx' 10014 && \
-    su -c 'chown -R nginx:nginx /var/log/nginx' 10014 && \
-    su -c 'chown -R nginx:nginx /etc/nginx/conf.d' 10014 && \
-    su -c 'touch /var/run/nginx.pid' 10014 && \
-    su -c 'chown -R nginx:nginx /var/run/nginx.pid' 10014
+RUN chown -R nginx:nginx /app && \
+    chmod -R 755 /app && \
+    chown -R nginx:nginx /var/cache/nginx && \
+    chown -R nginx:nginx /var/log/nginx && \
+    chown -R nginx:nginx /etc/nginx/conf.d && \
+    touch /var/run/nginx.pid && \
+    chown -R nginx:nginx /var/run/nginx.pid
 
 USER 10014
 
