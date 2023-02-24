@@ -26,6 +26,8 @@ COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html
 
 EXPOSE 80
 
+RUN sudo useradd -u 10014 -m newuser
+
 RUN su -c 'chown -R nginx:nginx /app' 10014 && \
     su -c 'chmod -R 755 /app' 10014 && \
     su -c 'chown -R nginx:nginx /var/cache/nginx' 10014 && \
